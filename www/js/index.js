@@ -26,7 +26,8 @@ var app =
                 }
             });
             $("#playbeep").click(function () {
-                navigator.notification.beep(beepn);
+                console.log("num bibps " + beepn);
+                navigator.notification.beep(2);
             })
 
             $("#turnleft").click(function () {
@@ -39,13 +40,13 @@ var app =
             })
 
             $("#keep").click(function () {
-                /*var watchID;
+                var watchID;
                 var options = {
                     frequency: 1000
                 };
-                watchID = navigator.compass.watchHeading(onSuccess, onError, options);*/
-                console.log(
-                    navigator.compass.getCurrentHeading + " aqui");
+                watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+                /*console.log(
+                    navigator.compass.getCurrentHeading() + " aqui");*/
 
             })
 
@@ -90,14 +91,14 @@ function myTimer() {
 }
 
 function onSuccess(heading) {
-
-    console.log(
-        navigator.compass.getCurrentHeading + " aqui");
+    console.log(heading)
+    /*console.log(
+        navigator.compass.getCurrentHeading + " aqui");*/
 
     document.getElementById("brujula").style.transform = "rotate(" + heading.magneticHeading + "deg)";
     guardar = rotate;
 
-    console.log("llego guardarFinal " + guardarFinal + " guardar " + guardar + " heading " + heading.magneticHeading)
+    console.log(" guardar " + guardar + " heading " + heading.magneticHeading)
 
 }
 

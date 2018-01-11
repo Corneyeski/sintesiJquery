@@ -6,5 +6,29 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-vibration": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-vibration@^3.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-dialogs": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-dialogs@^2.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-device-orientation": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device-orientation@^2.0.0"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
