@@ -50,8 +50,8 @@ var app =
 
             })
 
-            $("#game").css("width",window.screen.width)
-            $("#game").css("height",window.screen.height)
+            $("#game").css("width", window.screen.width-10)
+            $("#game").css("height", window.screen.height-10)
 
             console.log(window.screen.width + " + " + window.screen.height)
 
@@ -73,20 +73,31 @@ function myTimer() {
 
     let random = Math.floor((Math.random() * 3) + 1);
 
-    if(random === 1){
+    /*if(random === 1){
         var div = $("<div class='target'></div>");
     }else if(random === 2){
         var div = $("<div class='end'></div>");
     }else if(random === 3){
         var div = $("<div class='clear'></div>");
-    }
+    }*/
 
+    switch (random) {
+        case 1:
+            var div = $("<div class='target'></div>");
+            break;
+        case 2:
+            var div = $("<div class='end'></div>");
+            break;
+        case 3:
+            var div = $("<div class='clear'></div>");
+            break;
+    }
     let left = Math.floor((Math.random() * window.screen.width) + 1);
     let top = Math.floor((Math.random() * window.screen.height) + 1);
 
-    div.css({"margin-left":left},{"margin-top":top});
+    div.css({"margin-left": left}, {"margin-top": top});
 
-    $("#game").appendChild(div)
+    $("#game").append(div)
 
 }
 
