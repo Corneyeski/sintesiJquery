@@ -1,7 +1,13 @@
+//beeps
 var beept = "BEEPS: "
 var beepn = 0
+//posicion
 var rotate = 0;
 var guardar;
+//game
+var elements = 0;
+var myVar;
+var score = 0;
 var app =
     {
         initialize: function () {
@@ -50,13 +56,16 @@ var app =
 
             })
 
-            $("#game").css("width", window.screen.width-10)
-            $("#game").css("height", window.screen.height-10)
+            $("#game").css("width", window.screen.width)
+            $("#game").css("height", window.screen.height)
+            $("#game").css("position", "relative")
 
             console.log(window.screen.width + " + " + window.screen.height)
 
             $("#start").click(function () {
-                var myVar = setInterval(myTimer, 1000);
+                score = 0;
+                elements = 0;
+                myVar = setInterval(myTimer, 1000);
             })
         },
 
@@ -80,25 +89,38 @@ function myTimer() {
     }else if(random === 3){
         var div = $("<div class='clear'></div>");
     }*/
-
+    var div;
     switch (random) {
         case 1:
-            var div = $("<div class='target'></div>");
+             div = $("<div class='target'></div>");
             break;
         case 2:
-            var div = $("<div class='end'></div>");
+             div = $("<div class='end'></div>");
             break;
         case 3:
-            var div = $("<div class='clear'></div>");
+             div = $("<div class='clear'></div>");
             break;
     }
-    let left = Math.floor((Math.random() * window.screen.width) + 1);
-    let top = Math.floor((Math.random() * window.screen.height) + 1);
 
-    div.css({"margin-left": left}, {"margin-top": top});
+    var one =$("#game").width()-45
+    var two = $("#game").height()-45
+
+    console.log("geeey: " + one + " heeey: " + two)
+
+    let left = Math.floor(Math.random() * one);
+    let top = Math.floor(Math.random() * two);
+
+    console.log("left: " + left + " top: " + top)
+
+    div.css({"margin-left": left, "margin-top": top});
 
     $("#game").append(div)
 
+    div.click(remove);
+
+    elements++;
+
+    if(elements == 11) clearInterval(myVar);
 }
 
 function onSuccess(heading) {
@@ -115,6 +137,37 @@ function onSuccess(heading) {
 
 function onError(compassError) {
     alert('Compass error: ' + compassError.code);
+}
+
+
+function remove() {
+
+    var type = $(this).attr("class")
+
+    console.log(type)
+
+    switch (type) {
+        case "target":
+            score++;
+            elements--;
+            break;
+        case "clear":
+
+            console.log($("#game").children().length)
+
+            score += $("#game").children().length;
+            elements -= $("#game").children().length;
+            $("#game").empty();
+            console.log("entro")
+
+            break;
+        case "end":
+            break;
+    }
+
+    console.log("puntos: " + score + " elements: " + elements)
+
+    $(this).remove();
 }
 
 app.initialize();
