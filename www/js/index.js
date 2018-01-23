@@ -1,14 +1,10 @@
 //beeps
-var beept = "BEEPS: "
-var beepn = 0
+var beept = "BEEPS: ";
+var beepn = 0;
 //posicion
 var rotate = 0;
 var guardar;
 //game
-
-let one =$("#game").width()-45
-let two = $("#game").height()-45
-
 var elements = 0;
 var myVar;
 var score = 0;
@@ -23,31 +19,31 @@ var app =
 
             $("#lessbeep").click(function () {
                 if (beepn != 0) {
-                    beepn--
-                    $("#beeps").text(beept + beepn)
+                    beepn--;
+                    $("#beeps").text(beept + beepn);
                     $("#beeps").appendTo("#left")
                 }
             });
             $("#sumbeep").click(function () {
                 if (beepn != 5) {
-                    beepn++
-                    $("#beeps").text(beept + beepn)
+                    beepn++;
+                    $("#beeps").text(beept + beepn);
                     $("#beeps").appendTo("#right")
                 }
             });
             $("#playbeep").click(function () {
                 console.log("num bibps " + beepn);
                 navigator.notification.beep(2);
-            })
+            });
 
             $("#turnleft").click(function () {
                 rotate -= 10;
                 document.getElementById("brujula").style.transform = "rotate(" + rotate + "deg)"
-            })
+            });
             $("#turnright").click(function () {
                 rotate += 10;
                 document.getElementById("brujula").style.transform = "rotate(" + rotate + "deg)"
-            })
+            });
 
             $("#keep").click(function () {
                 var watchID;
@@ -58,17 +54,19 @@ var app =
                 /*console.log(
                     navigator.compass.getCurrentHeading() + " aqui");*/
 
-            })
+            });
 
-            $("#game").css("width", window.screen.width)
-            $("#game").css("height", window.screen.height)
-            $("#game").css("position", "relative")
+            $("#score").css("width", window.screen.width);
+            $("#game").css("width", window.screen.width);
+            $("#game").css("height", window.screen.height-50);
+            $("#game").css("position", "relative");
 
-            console.log(window.screen.width + " + " + window.screen.height)
+            console.log(window.screen.width + " + " + window.screen.height);
 
             $("#start").click(function () {
                 score = 0;
                 elements = 0;
+                $("#game").empty();
                 myVar = setInterval(myTimer, 1000);
             })
         },
@@ -98,6 +96,10 @@ function myTimer() {
              div = $("<div class='clear'></div>");
             break;
     }
+
+    var one =$("#game").width()-45;
+    var two = $("#game").height()-45;
+
     //console.log("geeey: " + one + " heeey: " + two)
 
     let left = Math.floor(Math.random() * one);
@@ -107,7 +109,7 @@ function myTimer() {
 
     div.css({"margin-left": left, "margin-top": top});
 
-    $("#game").append(div)
+    $("#game").append(div);
 
     div.click(remove);
 
@@ -117,7 +119,7 @@ function myTimer() {
 }
 
 function onSuccess(heading) {
-    console.log(heading)
+    console.log(heading);
     /*console.log(
         navigator.compass.getCurrentHeading + " aqui");*/
 
@@ -134,7 +136,7 @@ function onError(compassError) {
 
 
 function remove() {
-    var type = $(this).attr("class")
+    var type = $(this).attr("class");
     switch (type) {
         case "target":
             score++;
@@ -146,11 +148,11 @@ function remove() {
             $("#game").empty();
             break;
         case "end":
-            clearInterval(myVar)
+            clearInterval(myVar);
             $("#game").empty();
             break;
     }
-    console.log("puntos: " + score + " elements: " + elements)
+    console.log("puntos: " + score + " elements: " + elements);
     $(this).remove();
 }
 app.initialize();
